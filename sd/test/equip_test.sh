@@ -303,7 +303,8 @@ log "New datetime is $(date)"
 
 
 ### Check if reach gateway and notify
-ping -c1 -W2 $(get_config GATEWAY) > /dev/null
+GATEWAY=$(ip route | awk '/default/ { print $3 }')
+ping -c1 -W2 $GATEWAY > /dev/null
 if [ 0 -eq $? ]; then
     /home/rmm "/home/hd1/voice/wifi_connected.g726" 1
 fi
@@ -402,7 +403,8 @@ fi
 ### Final led color
 
 ### Check if reach gateway and notify
-ping -c1 -W2 $(get_config GATEWAY) > /dev/null
+GATEWAY=$(ip route | awk '/default/ { print $3 }')
+ping -c1 -W2 $GATEWAY > /dev/null
 if [ 0 -eq $? ]; then
     led $(get_config LED_WHEN_READY)
     /home/rmm "/home/hd1/voice/success.g726" 1
