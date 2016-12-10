@@ -59,7 +59,6 @@ log() {
 }
 
 get_config() {
-    key=$1
     grep "^$1=" /home/hd1/test/yi-hack.cfg  | cut -d"=" -f2
 }
 
