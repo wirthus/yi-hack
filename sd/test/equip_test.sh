@@ -49,12 +49,12 @@ LOG_FILE=${LOG_DIR}/log.txt
 
 log_init() {
     # clean the previous log file and add a starting line
-    echo "Starting to log..." > /home/hd1/test/log.txt
+    echo "Starting to log..." > ${LOG_FILE}
+    sync
 }
 
 log() {
-    # do_logging
-    echo "$@" >> /home/hd1/test/log.txt
+    echo "$@" >> ${LOG_FILE}
     sync
 }
 
@@ -76,17 +76,17 @@ get_config() {
 # start of our custom script !!!!!!
 ######################################################
 
+### Init logs
+log_init
+
 ### Launch Telnet server
 log "Start telnet server..."
 telnetd &
 
 
 ### configure timezone
-
 echo "$(get_config TIMEZONE)" > /etc/TZ
-
 ### get time is done after wifi configuration!
-
 
 
 ### first, let's do as the orignal script does....
@@ -197,8 +197,6 @@ done
 cp /home/hd1/test/wpa_supplicant.conf /home/wpa_supplicant.conf
 
 
-### Init logs
-log_init
 # Put version informations in logs and a file which will be included in the http server default page
 TMP_VERSION_FILE=/tmp/version_information
 rm -f ${TMP_VERSION_FILE}
