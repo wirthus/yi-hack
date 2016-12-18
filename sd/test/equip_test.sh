@@ -272,7 +272,7 @@ log "Wifi configuration answer: $res"
 
 if [[ $(get_config DHCP) == "yes" ]] ; then
     log "Do network configuration (DHCP)"
-    udhcpc --background --interface=ra0
+    udhcpc --interface=ra0
     log "Done"
 else
     log "Do network configuration 1/2 (IP and Gateway)"
