@@ -262,6 +262,11 @@ log "Debug mode = $(get_config DEBUG)"
 ### Let ppl hear that we start connect wifi
 /home/rmm "/home/hd1/voice/connectting.g726" 1
 
+HOSTNAME="$(get_config HOSTNAME)"
+HOSTNAME="${HOSTNAME// /}" # strip all whitespace
+log "Setting hostname to ${HOSTNAME}"
+hostname "${HOSTNAME}"
+
 log "Check for wifi configuration file...*"
 log $(find /home -name "wpa_supplicant.conf")
 
@@ -272,7 +277,7 @@ log "Wifi configuration answer: $res"
 
 if [[ $(get_config DHCP) == "yes" ]] ; then
     log "Do network configuration (DHCP)"
-    udhcpc --interface=ra0
+    udhcpc --interface=ra0 --hostname="${HOSTNAME}" >> ${LOG_FILE}
     log "Done"
 else
     log "Do network configuration 1/2 (IP and Gateway)"
