@@ -383,8 +383,10 @@ cd /home
 ./mp4record 60 &
 
 ### Start motion detection & reporting
-log "Starting motion notification processes"
-/home/hd1/test/check_motion.sh $(get_config MOTION_NOTIFICATION_URL) > /${LOG_DIR}/log_motion.txt 2>&1 &
+if [[ $(get_config MOTION_DETECT) == "yes" ]] ; then
+    log "Starting motion notification processes"
+    /home/hd1/test/check_motion.sh $(get_config MOTION_NOTIFICATION_URL) > /${LOG_DIR}/log_motion.txt 2>&1 &
+fi
 
 ### Some configuration
 

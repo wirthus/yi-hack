@@ -13,6 +13,7 @@ GATEWAY=192.168.1.254
 NAMESERVER=192.168.1.254
 
 ### Motion notifications
+MOTION_DETECT=yes
 # Optionally POST a JSON message of the status of motion detection to a URL
 # Values : URL to POST notification to, or leave empty to disable
 MOTION_NOTIFICATION_URL=
